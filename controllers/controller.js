@@ -1,6 +1,6 @@
 const { get_ip_location, get_location_temperature } = require("../services/apiService");
 
-// visitors greetings route information
+// Visitors greetings route information
 const client_info = async (req, res) => {
     try {
         const {visitor_name} = req.query;
