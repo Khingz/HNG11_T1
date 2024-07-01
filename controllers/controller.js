@@ -22,7 +22,7 @@ const client_info = async (req, res) => {
             if (!visitor_location) {
                 return res.status(404).json({error: `Hello ${visitor_name}!, We could not find the current temperature of your city`})
             }
-            res.status(200).json({
+            return res.status(200).json({
                 client_ip: visitor_ip,
                 location: visitor_location.city,
                 greeting: `Hello, ${visitor_name}!, the temperature is ${visitor_temp} degrees Celcuis in ${visitor_location.city}`
