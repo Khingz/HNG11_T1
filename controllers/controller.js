@@ -4,7 +4,7 @@ const { get_ip_location, get_location_temperature } = require("../services/apiSe
 const client_info = async (req, res) => {
     try {
         const {visitor_name} = req.query;
-        if (visitor_name) {
+        if (visitor_name && visitor_name !== '') {
             let visitor_ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
             if (visitor_ip === '::1' || visitor_ip.startsWith('::fff')) { // Handles cases of loopback network ip
                 visitor_ip = '127.0.0.1';
@@ -28,6 +28,7 @@ const client_info = async (req, res) => {
                 greeting: `Hello, ${visitor_name}!, the temperature is ${visitor_temp} degrees Celcuis in ${visitor_location.city}`
             })
         }
+        res.status(400).json({msg: 'No visitor name passed'})
     } catch(err) {
         console.log(err);
         res.status(500).json({error: 'Something went wrong'})
